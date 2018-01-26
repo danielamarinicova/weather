@@ -13,7 +13,7 @@ $(document).ready(function(){
 			urllink=urllink+'&appid=2058843c4f073fac90cf1a9dbe2e45da';
 
 
-			$.ajax({
+			$.ajax({	
 				url: urllink,
 				data:{ format: 'json'	},
 		
@@ -22,43 +22,44 @@ $(document).ready(function(){
 			},
 			dataType: 'json',
 			success : function(data){
+
+				console.log("temp:"+data.main.temp);
+				console.log(data);
+				console.log("desc:"+data.weather[0].description);
 		
-				$("#main").empty;
+				$('#content').empty();
 				var table=$("<table/>");
-				
-				var tr=getLine("City:",city);
+				 table.addClass("weatherTable");
+				var tr=getLine('City:',city);
 				table.append(tr);
-				var tr=getLine("Temperature:", data.main.temp-273.15,1);
+				var tr=getLine('Country',data.sys.country);
 				table.append(tr);
-				var tr=getLine("Humidity:", data.main.humidity );
+				var tr=getLine('Temperature:', data.main.temp-273.15);
 				table.append(tr);
-				var tr=getLine("Description:", data.main.description );
+				var tr=getLine('Humidity:', data.main.humidity+'%' );
 				table.append(tr);
-				var tr=getLine("Pressure:", data.main.pressure );
+				var tr=getLine('Pressure:', data.main.pressure+'hPa' );
 				table.append(tr);
 
+				$('#content').append(table);
+
 				if($("#details").is(':checked')){
-				var tr=getLine("Sunrise:", data.main.sunrise);
-				table.append(tr);
-				var tr=getLine("Sunset:", data.main.sunset);
-				table.append(tr);
-				var tr=getLine("Wind Speed:", data.main.wind);
+				var tr=getLine("Sunrise", new Date(data.sys.sunrise*1000).getHours()+':'+new Date(data.sys.sunrise*1000).getMinutes());
+              	table.append(tr);
+				var	tr=getLine("Sunset", new Date(data.sys.sunset*1000).getHours()+':'+new Date(data.sys.sunset*1000).getMinutes());
+            	table.append(tr);
+				var tr=getLine("Wind Speed:", data.wind.speed);
 				table.append(tr);
 				var tr=getLine("Min:", data.main.temp_min);
 				table.append(tr);
 				var tr=getLine("Max:", data.main.temp_max);
 				table.append(tr);
-				var tr=getLine("Visibility:", data.main.visibility);
+				var tr=getLine("Google Maps", "<a target='_blank' href='https://www.google.com/maps/search/?api=1&query=" + data.coord.lat + "," + data.coord.lon + "'>"+city+"</a>");
 				table.append(tr);
 		
 				}
 
 
-
-				
-
-
-				$("#main").append(table);
 
 			},
 
@@ -78,6 +79,7 @@ function getLine(data1,data2){
 				$(td2).append(data2);
 				tr.append(td1);
 				tr.append(td2);
+				return tr;
 
 }
 

@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+  body {background-image: : url("back.jpg");}
+  td { text-align: center; padding-top: 5px; padding-left: 10px; padding-right: 10px; padding-bottom:5px; }
+
+
+label {margin-left: 10px; margin-right: 10px; background-color: lightgreen;}
+
+h1 {  align-items: center; position: relative; }
+
+.weatherTable tr:nth-child(even) { background-color: lightblue }
+.weatherTable tr:nth-child(odd) { background-color: lightgreen }
+table {margin: auto; background-color: lightblue; }
+tr {background-color: lightblue;}
+</style>
+
+
 <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link herf="styleform.css" rel="stylesheet">
+
   <script src="jquery-3.2.1.min.js"></script>
   <script src="script.js"></script>
 </head>
 
   <body>
+
     <div class="container">
         <div class="row">
 <div class="col-sm-4"></div>
 <div class="col-sm-4">
-<h1>WEATHER APP</h1>
-<table style="width:100%">
+<h1 style="background-color: lightblue; color: white; margin: auto; ">WEATHER APP</h1>
+<table>
   <tr >
     <td><label>City:</label> <input type="text" placeholder="type city" id="city"> </td>
     <td><label>Country code:</label> <input type="text" id="code"></td> 
   </tr>
   <tr>
     <td><input type="checkbox" id="details" value="detail"><label>Details</label></td>
-    <td><input type="button" id=btnOk value="Get"></td>
+    <td><input type="button" id=btnOk value="Get" class="btn btn-success"> </td>
   </tr>
 </table>
-</div>
-<div class="col-sm-4">
-
+<div id="content">
 </div>
 </div>
-  <div id="main">
-  </div>
-
+<div class="col-sm-4"></div>
+</div>
+</div>
 </body>
 </html>
